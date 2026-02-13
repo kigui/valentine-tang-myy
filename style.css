@@ -32,7 +32,10 @@ body {
   }
   
   
- 
+  .flowers, .flower, .leaf, .flower__line {
+    /* Cho phép click/chạm xuyên qua hoa */
+    pointer-events: none !important; 
+}
   
   .wrapper {
     height: 200px;
