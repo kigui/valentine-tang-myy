@@ -31,71 +31,89 @@ body {
     animation:  pulseText 1.5s infinite alternate ease-in-out 3s;
   }
   
-  
-  .flowers, .flower, .leaf, .flower__line {
+  .letter img {
+    max-height: 100%; /* Giới hạn chiều cao để không đè mất chữ */
+    object-fit: cover;
+    display: block;
+    margin: 10px auto;
+    border: 2px solid #ff4d6d;
+}
+ .flowers, .flower, .leaf, .flower__line {
     /* Cho phép click/chạm xuyên qua hoa */
     pointer-events: none !important; 
 }
   
-  .wrapper {
-    height: 200px;
-    width: 300px;
+  /* 1. Tăng kích thước khung chứa chính */
+/* 1. Khung chứa chính (Wrapper) */
+.wrapper {
+    height: 276px; /* 240px * 1.15 */
+    width: 414px;  /* 360px * 1.15 */
     background-color: #E66A80;
     position: relative;
     display: flex;
     justify-content: center;
     z-index: 0;
-    margin: 20px auto;
+    margin: 50px auto; 
     pointer-events: none;
 }
 
+/* 2. Nắp thư (Lid) */
 .lid {
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    border-right: 150px solid transparent;
-    border-bottom: 100px solid transparent;
-    border-left: 150px solid transparent;
+    /* Mỗi bên border = 414 / 2 = 207px */
+    border-right: 207px solid transparent;
+    border-left: 207px solid transparent;
+    border-bottom: 138px solid transparent; /* 120px * 1.15 */
     transform-origin: top;
     transition: transform 0.4s ease-in-out;
 }
 
 .lid.one {
-    border-top: 100px solid #F28DA8;
+    border-top: 138px solid #F28DA8; /* 120px * 1.15 */
     transform: rotateX(0deg);
     z-index: 3;
 }
 
 .lid.two {
-    border-top: 100px solid #E66A80;
+    border-top: 138px solid #E66A80; /* 120px * 1.15 */
     transform: rotateX(90deg);
     z-index: 1;
 }
 
+/* 3. Thân bao thư (Envelope) */
 .envelope {
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
-    border-top: 100px solid transparent;
-    border-right: 150px solid #FFD3DA;
-    border-bottom: 100px solid #FFD3DA;
-    border-left: 150px solid #FFC0CB;
+    border-top: 138px solid transparent;      /* 120px * 1.15 */
+    border-right: 207px solid #FFD3DA;        /* 180px * 1.15 */
+    border-bottom: 138px solid #FFD3DA;       /* 120px * 1.15 */
+    border-left: 207px solid #FFC0CB;         /* 180px * 1.15 */
     z-index: 3;
+}
+
+/* 4. Lá thư trồi lên (Letter) */
+.open .letter {
+    /* Đẩy lên cao hơn một chút vì bao thư đã to ra */
+    transform: translateY(-150px); 
+    transition-delay: 0.5s;
 }
 
 .letter {
     position: absolute;
-    pointer-events: auto;
-    width: 80%;
+    bottom: 0;
+    width: 88%; /* Tăng chiều rộng lá thư để cân đối với bao thư to */
     height: 100%;
     background-color: #FFF5F7;
     border-radius: 15px;
-    z-index: 2;
-    transition: 0.5s;
+    z-index: 1; 
+    transition: all 0.5s ease;
     transform: translateY(0);
 }
 
